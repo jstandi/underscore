@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import Contacts
 
 class ProfileViewController: UIViewController {
     
@@ -34,6 +33,9 @@ class ProfileViewController: UIViewController {
         if user == nil {
             user = User()
         }
+        
+        // TODO: disable edit profile button if user is not currentUser
+        // TODO: add direct message feature if able
         
         usernameLabel.text = "@\(user.username!)"
         followingLabel.text = "\(user.following.count) Following"

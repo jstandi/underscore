@@ -8,10 +8,6 @@
 // TODO: GENERAL:
 // connect to firebase, add saving/loading data functions
 // add login view controller
-// set up profile view controller - need editable/non-editable versions
-// figure out name of app
-// figure out IBAction from text view
-// figure out expanding cells
 // figure out comments, likes, etc.
 
 // TODO: FIREBASE:
@@ -22,11 +18,12 @@
 // set up location use alerts, getting location, etc.
 // only show posts from followed people, users in 10mi? radius
 
+// TODO: ABOUT:
+// add this link in a button that says "How Google uses data when you use our partners' sites or apps": www.google.com/policies/privacy/partners/
+
 import UIKit
 
 class MainViewController: UIViewController {
-
-//    TODO: figure out how to make expanding cells depending on the size of the text within
     
     @IBOutlet var tableView: UITableView!
     
@@ -38,14 +35,14 @@ class MainViewController: UIViewController {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
-        posts.append(Post(poster: User(username: "test poster"), text: "short text"))
-        posts.append(Post(poster: User(username: "test poster"), text: "longer text that i'm hoping spans two lines"))
-        posts.append(Post(poster: User(username: "test poster"), text: "even longer text that should really span three or more lines but if it doesn't that's not a big deal"))
-        posts.append(Post(poster: User(username: "test poster"), text: "tesljasldfjas;ldfjalskdjf;lasjdfalskdfja;lsdfj"))
-        posts.append(Post(poster: User(username: "test poster"), text: "tesljasldfjas;ldfjalskdjf;lasjdfalskdfja;lsdfj"))
-        posts.append(Post(poster: User(username: "test poster"), text: "tesljasldfjas;ldfjalskdjf;lasjdfalskdfja;lsdfj"))
-        posts.append(Post(poster: User(username: "test poster"), text: "tesljasldfjas;ldfjalskdjf;lasjdfalskdfja;lsdfj"))
-        posts.append(Post(poster: User(username: "test poster"), text: "tesljasldfjas;ldfjalskdjf;lasjdfalskdfja;lsdfj"))
+        posts.append(Post(author: User(username: "test poster"), text: "short text"))
+        posts.append(Post(author: User(username: "test poster"), text: "longer text that i'm hoping spans two lines"))
+        posts.append(Post(author: User(username: "test poster"), text: "even longer text that should really span three or more lines but if it doesn't that's not a big deal"))
+        posts.append(Post(author: User(username: "test poster"), text: "tesljasldfjas;ldfjalskdjf;lasjdfalskdfja;lsdfj"))
+        posts.append(Post(author: User(username: "test poster"), text: "tesljasldfjas;ldfjalskdjf;lasjdfalskdfja;lsdfj"))
+        posts.append(Post(author: User(username: "test poster"), text: "tesljasldfjas;ldfjalskdjf;lasjdfalskdfja;lsdfj"))
+        posts.append(Post(author: User(username: "test poster"), text: "tesljasldfjas;ldfjalskdjf;lasjdfalskdfja;lsdfj"))
+        posts.append(Post(author: User(username: "test poster"), text: "tesljasldfjas;ldfjalskdjf;lasjdfalskdfja;lsdfj"))
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -57,7 +54,8 @@ class MainViewController: UIViewController {
             let destination = segue.destination as! NewPostViewController
             destination.user = currentUser
         } else if segue.identifier == "ShowProfile" {
-            let destination = segue.destination as! ProfileViewController
+            let navVC = segue.destination as! UINavigationController
+            let destination = navVC.viewControllers.first as! ProfileViewController
             destination.user = currentUser
         }
     }
@@ -70,7 +68,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! PostTableViewCell
-        cell.usernameLabel.text = posts[indexPath.row].poster.username
+        cell.usernameLabel.text = posts[indexPath.row].author.username
         cell.postTextLabel.text = posts[indexPath.row].text
         return cell
     }

@@ -20,6 +20,10 @@ class NewPostViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        if user == nil {
+            user = User()
+        }
+        
         postBarButton.isEnabled = false
         postingUserLabel.text = "From: @\(user.username ?? "")"
     }

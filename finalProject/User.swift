@@ -10,7 +10,7 @@ import UIKit
 
 class User {
     var username: String!
-    var email: String!
+    private var email: String!
     var posts: [Post]!
     var following: [User]!
     var followers: [User]!
