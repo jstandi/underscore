@@ -8,9 +8,7 @@
 // issues - crashes on first login
 // sort posts by time
 // need to add time posted to Post
-// figure out likes
 // crashed when clicking camera from change profile picture
-// fix the thing i will remember later
 
 import UIKit
 import FirebaseAuthUI

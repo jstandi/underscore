@@ -5,15 +5,17 @@
 //  Created by Jack Standefer on 4/6/22.
 //
 
+// TODO: set up segues to PostViewController from posts in tableView
+
 import UIKit
 import FirebaseAuthUI
 import FirebaseGoogleAuthUI
 
 class ProfileViewController: UIViewController {
     
-    @IBOutlet weak var usernameLabel: UILabel!
+    @IBOutlet weak var usernameLabel: UITextField!
     @IBOutlet weak var likesLabel: UILabel!
-    @IBOutlet weak var bioLabel: UILabel!
+    @IBOutlet weak var bioLabel: UITextField!
     @IBOutlet weak var profilePictureImageView: UIImageView!
     @IBOutlet weak var changeProfilePictureButton: UIButton!
     @IBOutlet weak var editProfileButton: UIButton!
@@ -41,9 +43,10 @@ class ProfileViewController: UIViewController {
         imagePickerController.delegate = self
         changeProfilePictureButton.isHidden = true
         editProfileButton.isHidden = true
+        usernameLabel.isEnabled = false
+        bioLabel.isEnabled = false
         
         posts = Posts()
-        photo = Photo()
         photos = Photos()
         
         if currentUser.userID == user.userID {
@@ -78,9 +81,7 @@ class ProfileViewController: UIViewController {
                 }
             }
         }
-        
-        // TODO: add direct message feature if able
-        
+                
         usernameLabel.text = user.username
     }
     
@@ -123,6 +124,9 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        
+        photo = Photo()
+        
         if let editedImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
             photo.image = editedImage
             photo.saveData(user: user) { success in

@@ -6,27 +6,14 @@
 //
 
 // TODO: GENERAL:
-// connect to firebase, add saving/loading data functions
-// set up basic functions (posting, viewing posts, etc before getting complex)
-// change username labels from @username to 'username'
-// figure out comments, likes, etc.
-// find a way to get all posts with a given userID
+// figure out comments
 
 // TODO: FIREBASE:
 // set up following system
-// add saving/loading data functions
 
 // TODO: LOCATION:
 // set up location use alerts, getting location, etc.
 // only show posts from followed people, users in 10mi? radius
-
-// TODO: ABOUT:
-// add this link in a button that says "How Google uses data when you use our partners' sites or apps": www.google.com/policies/privacy/partners/
-
-// QUESTIONS:
-// saving complex data to firebase - specifically an array of class objects
-// what is going on with my firebase - added package dependencies
-// is it feasible for me to get this done within a week
 
 import UIKit
 import Firebase
@@ -37,7 +24,6 @@ class MainViewController: UIViewController {
     @IBOutlet var tableView: UITableView!
     
     var posts: Posts!
-    var cellHeight: CGFloat = 125
     var currentUser: ScoreUser!
     var locationManager: CLLocationManager!
     var currentLocation: CLLocation!
@@ -52,8 +38,9 @@ class MainViewController: UIViewController {
         
         posts.loadData {
             self.tableView.reloadData()
+            self.tableView.rowHeight = UITableView.automaticDimension
+            self.tableView.estimatedRowHeight = 175
         }
-
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -103,7 +90,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return cellHeight
+        return 150
     }
 }
 
