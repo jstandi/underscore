@@ -68,6 +68,7 @@ class MainLoginViewController: UIViewController {
     }
     
     @IBAction func googleLoginButtonPressed(_ sender: UIButton) {
+        performSegue(withIdentifier: "SuccessfulGoogleSignIn", sender: nil)
     }
     
     @IBAction func usernameSignUpButtonPressed(_ sender: UIButton) {

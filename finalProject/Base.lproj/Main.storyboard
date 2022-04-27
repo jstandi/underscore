@@ -3,6 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -556,9 +557,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d6L-VX-BJu">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d6L-VX-BJu">
                                 <rect key="frame" x="120" y="449" width="175" height="31"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Sign in with Google"/>
                                 <connections>
@@ -567,9 +567,8 @@
                                     <segue destination="JfO-ot-cWc" kind="show" identifier="SuccessfulGoogleSignIn" id="gxQ-f3-AKg"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hct-Fe-0U5">
-                                <rect key="frame" x="97" y="513" width="222" height="31"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hct-Fe-0U5">
+                                <rect key="frame" x="96.5" y="513" width="222" height="31"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Sign in with username or email"/>
                                 <connections>
@@ -578,9 +577,8 @@
                                     <segue destination="GlE-6V-Hah" kind="show" identifier="UsernameSignIn" id="XPC-Xy-EXf"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UNo-q8-fbW">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UNo-q8-fbW">
                                 <rect key="frame" x="135" y="573" width="145" height="31"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="New user? Sign up"/>
                                 <connections>
@@ -588,16 +586,39 @@
                                     <segue destination="14C-el-zsw" kind="show" identifier="NewUserSignUp" id="ilY-JW-3D9"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="underscore" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GLJ-74-pLU">
-                                <rect key="frame" x="135" y="141" width="144" height="35"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="underscore" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GLJ-74-pLU">
+                                <rect key="frame" x="135" y="141" width="145" height="35"/>
                                 <fontDescription key="fontDescription" name="DINAlternate-Bold" family="DIN Alternate" pointSize="30"/>
-                                <nil key="textColor"/>
+                                <color key="textColor" systemColor="systemBlueColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="version 1.0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oP2-lZ-qR5">
+                                <rect key="frame" x="135" y="184" width="145" height="24"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="24" id="vyq-Lh-FpL"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="DINAlternate-Bold" family="DIN Alternate" pointSize="20"/>
+                                <color key="textColor" name="AccentColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="wmh-aJ-R7B"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="UNo-q8-fbW" firstAttribute="top" secondItem="Hct-Fe-0U5" secondAttribute="bottom" constant="29" id="4gw-Zq-6Dq"/>
+                            <constraint firstAttribute="bottom" secondItem="d6L-VX-BJu" secondAttribute="bottom" constant="416" id="7WM-8D-hvm"/>
+                            <constraint firstItem="GLJ-74-pLU" firstAttribute="leading" secondItem="oP2-lZ-qR5" secondAttribute="leading" id="9rH-OF-eqG"/>
+                            <constraint firstItem="d6L-VX-BJu" firstAttribute="leading" secondItem="wmh-aJ-R7B" secondAttribute="leading" constant="120" id="Ehh-Qd-NEN"/>
+                            <constraint firstItem="d6L-VX-BJu" firstAttribute="centerX" secondItem="Hct-Fe-0U5" secondAttribute="centerX" id="NPu-A5-8uO"/>
+                            <constraint firstItem="GLJ-74-pLU" firstAttribute="top" secondItem="wmh-aJ-R7B" secondAttribute="top" constant="53" id="SYQ-xD-p1M"/>
+                            <constraint firstItem="GLJ-74-pLU" firstAttribute="centerX" secondItem="d6L-VX-BJu" secondAttribute="centerX" id="SpS-03-Fho"/>
+                            <constraint firstItem="Hct-Fe-0U5" firstAttribute="top" secondItem="d6L-VX-BJu" secondAttribute="bottom" constant="33" id="UsA-GD-9hd"/>
+                            <constraint firstItem="GLJ-74-pLU" firstAttribute="centerX" secondItem="oP2-lZ-qR5" secondAttribute="centerX" id="j1o-ck-iq2"/>
+                            <constraint firstItem="wmh-aJ-R7B" firstAttribute="trailing" secondItem="oP2-lZ-qR5" secondAttribute="trailing" constant="134" id="qOz-EQ-JGI"/>
+                            <constraint firstItem="GLJ-74-pLU" firstAttribute="leading" secondItem="UNo-q8-fbW" secondAttribute="leading" id="qs5-3v-Vvm"/>
+                            <constraint firstItem="oP2-lZ-qR5" firstAttribute="top" secondItem="GLJ-74-pLU" secondAttribute="bottom" constant="8" symbolic="YES" id="uQW-j7-1Dq"/>
+                            <constraint firstItem="oP2-lZ-qR5" firstAttribute="leading" secondItem="wmh-aJ-R7B" secondAttribute="leading" constant="135" id="yuS-GZ-wbM"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="zPJ-KC-sH7"/>
                     <connections>
@@ -948,6 +969,9 @@
         <image name="gearshape" catalog="system" width="128" height="121"/>
         <image name="heart" catalog="system" width="128" height="109"/>
         <image name="person.fill" catalog="system" width="128" height="120"/>
+        <namedColor name="AccentColor">
+            <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
