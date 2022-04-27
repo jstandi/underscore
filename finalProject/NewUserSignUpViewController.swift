@@ -22,7 +22,7 @@ class NewUserSignUpViewController: UIViewController {
     private var password: String!
     var email: String!
     var dateOfBirth: Date!
-    var newUser: User!
+    var newUser: ScoreUser!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -77,7 +77,7 @@ class NewUserSignUpViewController: UIViewController {
     }
     
     @IBAction func createAccountButtonPressed(_ sender: UIButton) {
-        newUser = User(username: username, password: password, email: email, dob: dateOfBirth)
+//        newUser = ScoreUser(username: username, password: password, email: email, dob: dateOfBirth, userID: "")
     }
     
     @IBAction func cancelBarButtonPressed(_ sender: UIBarButtonItem) {

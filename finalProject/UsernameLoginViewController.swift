@@ -17,7 +17,7 @@ class UsernameLoginViewController: UIViewController {
     private var email: String!
     private var password: String!
     
-    var user: User!
+    var user: ScoreUser!
     
     override func viewDidLoad() {
         super.viewDidLoad()

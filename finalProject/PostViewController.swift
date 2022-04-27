@@ -18,14 +18,12 @@ class PostViewController: UIViewController {
     @IBOutlet weak var likeButton: UIButton!
     
     var post: Post!
-    var comments: [Comment] = []
+    var comments: Comments!
+    var currentUser: ScoreUser!
     var hasLiked = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if post == nil {
-            post = Post(author: User(), text: "")
-        }
         updateUserInterface()
     }
     
@@ -33,12 +31,11 @@ class PostViewController: UIViewController {
         if segue.identifier == "ShowAuthorProfile" {
             let navVC = segue.destination as! UINavigationController
             let destination = navVC.viewControllers.first as! ProfileViewController
-            destination.user = post.author
         }
     }
     
     func updateUserInterface() {
-        postTitleLabel.text = post.author.username
+        postTitleLabel.text = currentUser.username
         postTextLabel.text = post.text
         likesLabel.text = "\(post.likes) likes"
     }
@@ -67,23 +64,22 @@ class PostViewController: UIViewController {
         if hasLiked {
             post.likes -= 1
             updateUserInterface()
+            hasLiked = false
         } else {
             post.likes += 1
             updateUserInterface()
+            hasLiked = true
         }
     }
 }
 
 extension PostViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return post.comments.count
+        return comments.commentArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CommentCell", for: indexPath) as! CommentTableViewCell
-        cell.comment = post.comments[indexPath.row]
         return cell
     }
-    
-    
 }
