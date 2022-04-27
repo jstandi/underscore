@@ -41,6 +41,8 @@ class MainViewController: UIViewController {
     var currentUser: ScoreUser!
     var locationManager: CLLocationManager!
     var currentLocation: CLLocation!
+    var postsInRange: [Post] = []
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()

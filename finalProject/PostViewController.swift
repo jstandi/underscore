@@ -25,6 +25,10 @@ class PostViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         updateUserInterface()
+        post.loadDataForLikes {
+            self.likesLabel.text = "\(self.post.usersWhoLiked.count) likes"
+            self.postTextLabel.sizeToFit()
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -35,13 +39,20 @@ class PostViewController: UIViewController {
     }
     
     func updateUserInterface() {
-        postTitleLabel.text = currentUser.username
+        postTitleLabel.text = post.postingUsername
         postTextLabel.text = post.text
         likesLabel.text = "\(post.likes) likes"
     }
     
     func leaveViewController() {
-        navigationController?.popViewController(animated: true)
+        post.saveData { success in
+            if success {
+                print("saved data")
+                self.navigationController?.popViewController(animated: true)
+            } else {
+                print("data not saved")
+            }
+        }
     }
     
     @IBAction func authorLabelTapped(_ sender: UITapGestureRecognizer) {
@@ -61,14 +72,28 @@ class PostViewController: UIViewController {
     }
     
     @IBAction func likeButtonPressed(_ sender: UIButton) {
-        if hasLiked {
-            post.likes -= 1
-            updateUserInterface()
-            hasLiked = false
+        if self.post.usersWhoLiked.contains(self.currentUser.userID) {
+            self.post.likes -= 1
+            if let index = self.post.usersWhoLiked.firstIndex(of: self.currentUser.userID) {
+                self.post.usersWhoLiked.remove(at: index)
+            }
+            self.post.saveData { success in
+                if success {
+                    print("data saved")
+                } else {
+                    print("could not save data")
+                }
+            }
         } else {
-            post.likes += 1
-            updateUserInterface()
-            hasLiked = true
+            self.post.likes += 1
+            self.post.usersWhoLiked.append(self.currentUser.userID)
+            self.post.saveData { success in
+                if success {
+                    print("data saved")
+                } else {
+                    print("could not save data")
+                }
+            }
         }
     }
 }

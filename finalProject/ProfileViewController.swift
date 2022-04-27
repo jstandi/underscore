@@ -27,6 +27,9 @@ class ProfileViewController: UIViewController {
     var editable: Bool!
     var profilePosts: [Post] = []
     var totalLikes = 0
+    var profilePicture: UIImage!
+    var photo: Photo!
+    var photos: Photos!
     
     var imagePickerController = UIImagePickerController()
 
@@ -40,6 +43,8 @@ class ProfileViewController: UIViewController {
         editProfileButton.isHidden = true
         
         posts = Posts()
+        photo = Photo()
+        photos = Photos()
         
         if currentUser.userID == user.userID {
             editable = true
@@ -58,6 +63,20 @@ class ProfileViewController: UIViewController {
             self.tableView.reloadData()
             self.numPostsLabel.text = "\(self.profilePosts.count) Posts"
             self.likesLabel.text = "\(self.totalLikes) Likes"
+        }
+        
+        photos.loadData(user: user) {
+            for photo in self.photos.photoArray {
+                if photo.photoUserID == self.user.userID {
+                    photo.loadImage(user: self.user) { success in
+                        if success {
+                            self.profilePicture = photo.image
+                        } else {
+                            print("error loading image")
+                        }
+                    }
+                }
+            }
         }
         
         // TODO: add direct message feature if able
@@ -103,16 +122,30 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
 }
 
 extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-//    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-//        if let editedImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
-//            user.profilePicture = editedImage
-//            profilePictureImageView.image = editedImage
-//        } else if let originalImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-//            user.profilePicture = originalImage
-//            profilePictureImageView.image = originalImage
-//        }
-//        dismiss(animated: true, completion: nil)
-//    }
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let editedImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
+            photo.image = editedImage
+            photo.saveData(user: user) { success in
+                if success {
+                    print("photo saved")
+                } else {
+                    print("photo not saved")
+                }
+            }
+            profilePictureImageView.image = editedImage
+        } else if let originalImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+            photo.image = originalImage
+            photo.saveData(user: user) { success in
+                if success {
+                    print("photo saved")
+                } else {
+                    print("photo not saved")
+                }
+            }
+            profilePictureImageView.image = originalImage
+        }
+        dismiss(animated: true, completion: nil)
+    }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated: true, completion: nil)

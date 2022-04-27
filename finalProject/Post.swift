@@ -16,9 +16,10 @@ class Post: NSObject, MKAnnotation {
     var postingUsername: String
     var postingUserID: String
     var documentID: String
+    var usersWhoLiked: [String]
     
     var dictionary: [String: Any] {
-        return ["text": text, "latitude": latitude, "longitude": longitude, "likes": likes, "postingUsername": postingUsername, "postingUserID": postingUserID, "documentID": documentID]
+        return ["text": text, "latitude": latitude, "longitude": longitude, "likes": likes, "postingUsername": postingUsername, "postingUserID": postingUserID, "documentID": documentID, "usersWhoLiked": usersWhoLiked]
     }
     
     var latitude: CLLocationDegrees {
@@ -33,17 +34,18 @@ class Post: NSObject, MKAnnotation {
         return CLLocation(latitude: latitude, longitude: longitude)
     }
     
-    init(text: String, coordinate: CLLocationCoordinate2D, likes: Int, postingUsername: String, postingUserID: String, documentID: String) {
+    init(text: String, coordinate: CLLocationCoordinate2D, likes: Int, postingUsername: String, postingUserID: String, documentID: String, usersWhoLiked: [String]) {
         self.text = text
         self.coordinate = coordinate
         self.likes = likes
         self.postingUsername = postingUsername
         self.postingUserID = postingUserID
         self.documentID = documentID
+        self.usersWhoLiked = usersWhoLiked
     }
     
     override convenience init() {
-        self.init(text: "", coordinate: CLLocationCoordinate2D(), likes: 0, postingUsername: "", postingUserID: "", documentID: "")
+        self.init(text: "", coordinate: CLLocationCoordinate2D(), likes: 0, postingUsername: "", postingUserID: "", documentID: "", usersWhoLiked: [])
     }
     
     convenience init(dictionary: [String: Any]) {
@@ -54,7 +56,8 @@ class Post: NSObject, MKAnnotation {
         let likes = dictionary["likes"] as! Int? ?? 0
         let postingUsername = dictionary["postingUsername"] as! String? ?? ""
         let postingUserID = dictionary["postingUserID"] as! String? ?? ""
-        self.init(text: text, coordinate: coordinate, likes: likes, postingUsername: postingUsername, postingUserID: postingUserID, documentID: "")
+        let usersWhoLiked = dictionary["usersWhoLiked"] as! [String]? ?? []
+        self.init(text: text, coordinate: coordinate, likes: likes, postingUsername: postingUsername, postingUserID: postingUserID, documentID: "", usersWhoLiked: usersWhoLiked)
     }
     
     func saveData(completion: @escaping (Bool) -> ()) {
@@ -79,7 +82,7 @@ class Post: NSObject, MKAnnotation {
                 completion(true)
             }
         } else {
-            let ref = db.collection("spots").document(self.documentID)
+            let ref = db.collection("posts").document(self.documentID)
             ref.setData(dataToSave) { (error) in
                 guard error == nil else {
                     print("ERROR in updating document \(error!.localizedDescription)")
@@ -88,6 +91,25 @@ class Post: NSObject, MKAnnotation {
                 print("Updated document \(self.documentID)")
                 completion(true)
             }
+        }
+    }
+    
+    func loadDataForLikes(completed: @escaping () -> ()) {
+        let db = Firestore.firestore()
+        db.collection("posts").addSnapshotListener { querySnapshot, error in
+            guard error == nil else {
+                print("ERROR: adding snapshot listener")
+                return completed()
+            }
+            for document in querySnapshot!.documents {
+                let post = Post(dictionary: document.data())
+                if document.documentID == self.documentID {
+                    self.likes = post.likes
+                    self.usersWhoLiked = post.usersWhoLiked
+                    print("loaded data for post with text: \(post.text) with list: \(post.usersWhoLiked)")
+                }
+            }
+            completed()
         }
     }
 }

@@ -95,7 +95,7 @@
                                 <rect key="frame" x="20" y="88" width="374" height="42"/>
                                 <gestureRecognizers/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="42" id="IWM-fZ-f4z"/>
+                                    <constraint firstAttribute="height" constant="42" id="UJA-e8-PaJ"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="DINAlternate-Bold" family="DIN Alternate" pointSize="19"/>
                                 <nil key="textColor"/>
@@ -111,25 +111,8 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fvl-W5-J81">
-                                <rect key="frame" x="20" y="186" width="46" height="31"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="heart" catalog="system"/>
-                                <connections>
-                                    <action selector="likeButtonPressed:" destination="aPD-uQ-0vA" eventType="touchUpInside" id="otw-vq-5KI"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="32 likes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nn2-vg-TXx">
-                                <rect key="frame" x="74" y="186" width="137" height="31"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="OED-FV-aGg">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="OED-FV-aGg">
                                 <rect key="frame" x="0.0" y="225" width="414" height="671"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CommentCell" rowHeight="120" id="Pf7-pR-fyP" customClass="CommentTableViewCell" customModule="finalProject" customModuleProvider="target">
@@ -179,9 +162,25 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wjf-Zd-CPC">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="32 likes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nn2-vg-TXx">
+                                <rect key="frame" x="74" y="186" width="137" height="31"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="137" id="UEm-63-cwW"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fvl-W5-J81">
+                                <rect key="frame" x="20" y="186" width="46" height="31"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="heart" catalog="system"/>
+                                <connections>
+                                    <action selector="likeButtonPressed:" destination="aPD-uQ-0vA" eventType="touchUpInside" id="otw-vq-5KI"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wjf-Zd-CPC">
                                 <rect key="frame" x="219" y="186" width="175" height="31"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Comment"/>
                                 <connections>
@@ -193,12 +192,28 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <gestureRecognizers/>
                         <constraints>
-                            <constraint firstItem="U5s-gG-yCG" firstAttribute="top" secondItem="vIQ-kL-LUK" secondAttribute="bottom" constant="8" symbolic="YES" id="0pX-BT-3d4"/>
-                            <constraint firstItem="U5s-gG-yCG" firstAttribute="leading" secondItem="I1m-rA-FHp" secondAttribute="leading" constant="20" id="Wvd-or-Xjt"/>
-                            <constraint firstItem="vIQ-kL-LUK" firstAttribute="top" secondItem="I1m-rA-FHp" secondAttribute="top" id="abb-DR-VSH"/>
-                            <constraint firstItem="I1m-rA-FHp" firstAttribute="trailing" secondItem="U5s-gG-yCG" secondAttribute="trailing" constant="20" id="dgz-ku-SOt"/>
-                            <constraint firstItem="I1m-rA-FHp" firstAttribute="trailing" secondItem="vIQ-kL-LUK" secondAttribute="trailing" constant="20" id="eon-5y-1HF"/>
-                            <constraint firstItem="vIQ-kL-LUK" firstAttribute="leading" secondItem="I1m-rA-FHp" secondAttribute="leading" constant="20" id="wkf-J8-8xh"/>
+                            <constraint firstItem="OED-FV-aGg" firstAttribute="top" secondItem="Wjf-Zd-CPC" secondAttribute="bottom" constant="8" symbolic="YES" id="0Zd-ib-gbb"/>
+                            <constraint firstItem="nn2-vg-TXx" firstAttribute="top" secondItem="U5s-gG-yCG" secondAttribute="bottom" constant="8" symbolic="YES" id="0m3-DD-YNz"/>
+                            <constraint firstItem="OED-FV-aGg" firstAttribute="top" secondItem="fvl-W5-J81" secondAttribute="bottom" constant="8" symbolic="YES" id="27d-88-uTX"/>
+                            <constraint firstItem="vIQ-kL-LUK" firstAttribute="top" secondItem="I1m-rA-FHp" secondAttribute="top" id="4tj-we-Itk"/>
+                            <constraint firstItem="OED-FV-aGg" firstAttribute="top" secondItem="nn2-vg-TXx" secondAttribute="bottom" constant="8" symbolic="YES" id="5ok-Jz-IQy"/>
+                            <constraint firstItem="I1m-rA-FHp" firstAttribute="trailing" secondItem="U5s-gG-yCG" secondAttribute="trailing" constant="20" id="9QI-oJ-4yA"/>
+                            <constraint firstItem="fvl-W5-J81" firstAttribute="leading" secondItem="I1m-rA-FHp" secondAttribute="leading" constant="20" id="9WQ-SM-Wul"/>
+                            <constraint firstItem="Wjf-Zd-CPC" firstAttribute="leading" secondItem="nn2-vg-TXx" secondAttribute="trailing" constant="8" symbolic="YES" id="Bzd-g0-Psr"/>
+                            <constraint firstItem="OED-FV-aGg" firstAttribute="top" secondItem="Wjf-Zd-CPC" secondAttribute="bottom" constant="8" symbolic="YES" id="VWi-Yx-7b5"/>
+                            <constraint firstItem="nn2-vg-TXx" firstAttribute="leading" secondItem="fvl-W5-J81" secondAttribute="trailing" constant="8" symbolic="YES" id="WX4-da-XmD"/>
+                            <constraint firstItem="Wjf-Zd-CPC" firstAttribute="top" secondItem="U5s-gG-yCG" secondAttribute="bottom" constant="8" symbolic="YES" id="ZqW-YG-Kc7"/>
+                            <constraint firstItem="I1m-rA-FHp" firstAttribute="trailing" secondItem="Wjf-Zd-CPC" secondAttribute="trailing" constant="20" id="cSG-DK-lnn"/>
+                            <constraint firstItem="fvl-W5-J81" firstAttribute="top" secondItem="U5s-gG-yCG" secondAttribute="bottom" constant="8" symbolic="YES" id="iew-6W-2pK"/>
+                            <constraint firstItem="nn2-vg-TXx" firstAttribute="leading" secondItem="fvl-W5-J81" secondAttribute="trailing" constant="8" symbolic="YES" id="jty-MS-Ct1"/>
+                            <constraint firstItem="OED-FV-aGg" firstAttribute="trailing" secondItem="I1m-rA-FHp" secondAttribute="trailing" id="nnj-mW-Kjt"/>
+                            <constraint firstItem="I1m-rA-FHp" firstAttribute="trailing" secondItem="vIQ-kL-LUK" secondAttribute="trailing" constant="20" id="nsY-vk-ZDh"/>
+                            <constraint firstItem="U5s-gG-yCG" firstAttribute="leading" secondItem="I1m-rA-FHp" secondAttribute="leading" constant="20" id="qN4-qR-nIK"/>
+                            <constraint firstItem="OED-FV-aGg" firstAttribute="leading" secondItem="I1m-rA-FHp" secondAttribute="leading" id="sCF-xf-R3x"/>
+                            <constraint firstItem="vIQ-kL-LUK" firstAttribute="leading" secondItem="I1m-rA-FHp" secondAttribute="leading" constant="20" id="t1m-cV-ANR"/>
+                            <constraint firstItem="Wjf-Zd-CPC" firstAttribute="leading" secondItem="nn2-vg-TXx" secondAttribute="trailing" constant="8" symbolic="YES" id="u1w-wL-XBq"/>
+                            <constraint firstAttribute="bottom" secondItem="OED-FV-aGg" secondAttribute="bottom" id="wR2-JE-Vc0"/>
+                            <constraint firstItem="U5s-gG-yCG" firstAttribute="top" secondItem="vIQ-kL-LUK" secondAttribute="bottom" constant="8" symbolic="YES" id="zrq-10-Kdt"/>
                         </constraints>
                         <connections>
                             <outletCollection property="gestureRecognizers" destination="rwV-DQ-2RI" appends="YES" id="WQK-gM-KE6"/>
@@ -962,7 +977,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="G6Y-ZE-slv"/>
+        <segue reference="mWh-JK-Fa8"/>
         <segue reference="gxQ-f3-AKg"/>
     </inferredMetricsTieBreakers>
     <resources>
