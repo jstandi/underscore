@@ -5,8 +5,6 @@
 //  Created by Jack Standefer on 4/6/22.
 //
 
-// TODO: set up segues to PostViewController from posts in tableView
-
 import UIKit
 import FirebaseAuthUI
 import FirebaseGoogleAuthUI
@@ -32,11 +30,16 @@ class ProfileViewController: UIViewController {
     var profilePicture: UIImage!
     var photo: Photo!
     var photos: Photos!
+    var currentlyEditing = false
     
     var imagePickerController = UIImagePickerController()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let tap = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:)))
+        tap.cancelsTouchesInView = false
+        self.view.addGestureRecognizer(tap)
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -53,14 +56,17 @@ class ProfileViewController: UIViewController {
             editable = true
             changeProfilePictureButton.isHidden = false
             editProfileButton.isHidden = false
-            usernameLabel.isUserInteractionEnabled = true
+            usernameLabel.isEnabled = true
+            bioLabel.isEnabled = true
         }
         
         posts.loadData() {
             for post in self.posts.postArray {
                 if post.postingUserID == self.user.userID {
-                    self.profilePosts.append(post)
-                    self.totalLikes += post.likes
+                    if !self.profilePosts.contains(post) {
+                        self.profilePosts.append(post)
+                        self.totalLikes += post.likes
+                    }
                 }
             }
             self.tableView.reloadData()
@@ -85,6 +91,14 @@ class ProfileViewController: UIViewController {
         usernameLabel.text = user.username
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ShowPostFromProfile" {
+            let destination = segue.destination as! PostViewController
+            destination.currentUser = currentUser
+            destination.post = profilePosts[tableView.indexPathForSelectedRow!.row]
+        }
+    }
+    
     func cameraOrLibraryAlert() {
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         let photoLibraryAction = UIAlertAction(title: "Photo Library", style: .default) { (_) in
@@ -103,8 +117,33 @@ class ProfileViewController: UIViewController {
     }
     
     @IBAction func profilePhotoButtonPressed(_ sender: UIButton) {
-//        TODO: need to save data here - change profile picture in view controller in viewWillAppear()
+//        TODO: need to fix data-saving issue
         cameraOrLibraryAlert()
+    }
+    
+    func presentSaveAlert() {
+        let alertController = UIAlertController(title: "Info Saved", message: nil, preferredStyle: .alert)
+        let confirmAction = UIAlertAction(title: "Continue", style: .default, handler: nil)
+        
+        alertController.addAction(confirmAction)
+        
+        present(alertController, animated: true, completion: nil)
+    }
+    
+    @IBAction func editButtonPressed(_ sender: UIButton) {
+        let noSpacesUsername = usernameLabel.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+        if noSpacesUsername != "" {
+            currentUser.username = noSpacesUsername
+        }
+        user.bio = bioLabel.text!
+        user.updateUserInfo { success in
+            if success {
+                self.presentSaveAlert()
+                print("updated user info")
+            } else {
+                print("could not update user info")
+            }
+        }
     }
 }
 

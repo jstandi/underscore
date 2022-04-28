@@ -20,21 +20,34 @@ class PostViewController: UIViewController {
     var post: Post!
     var comments: Comments!
     var currentUser: ScoreUser!
+    var users: ScoreUsers!
+    var postingUser: ScoreUser!
     var hasLiked = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         updateUserInterface()
+        
+        users = ScoreUsers()
+        
         post.loadDataForLikes {
             self.likesLabel.text = "\(self.post.usersWhoLiked.count) likes"
             self.postTextLabel.sizeToFit()
         }
+        
+        users.loadData {
+            for user in self.users.userArray {
+                if user.userID == self.post.postingUserID {
+                    self.postingUser = user
+                }
+            }
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "ShowAuthorProfile" {
-            let navVC = segue.destination as! UINavigationController
-            let destination = navVC.viewControllers.first as! ProfileViewController
+        if segue.identifier == "ShowProfileFromPost" {
+            let destination = segue.destination as! ProfileViewController
+            destination.user = postingUser
         }
     }
     
@@ -53,6 +66,16 @@ class PostViewController: UIViewController {
                 print("data not saved")
             }
         }
+    }
+    
+    @objc func titleLabelTapped(_ sender: UITapGestureRecognizer) {
+        print("working")
+    }
+    
+    func setupLabelTap() {
+        let labelTap = UITapGestureRecognizer(target: self, action: #selector(self.titleLabelTapped(_:)))
+                self.postTitleLabel.isUserInteractionEnabled = true
+                self.postTitleLabel.addGestureRecognizer(labelTap)
     }
     
     @IBAction func authorLabelTapped(_ sender: UITapGestureRecognizer) {

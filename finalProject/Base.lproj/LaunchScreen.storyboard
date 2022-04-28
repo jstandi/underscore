@@ -17,18 +17,19 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="underscore" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iel-6P-j2c">
-                                <rect key="frame" x="135.5" y="132" width="143.5" height="35"/>
+                                <rect key="frame" x="117" y="132" width="180" height="35"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="35" id="eey-Kd-qaJ"/>
+                                    <constraint firstAttribute="width" constant="180" id="Veh-eS-wwG"/>
+                                    <constraint firstAttribute="height" constant="35" id="maJ-o3-KzJ"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="DINAlternate-Bold" family="DIN Alternate" pointSize="30"/>
                                 <color key="textColor" systemColor="systemBlueColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="version 1.1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q4Q-VZ-PKY">
-                                <rect key="frame" x="168.5" y="195" width="77" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="version 1.2.0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q4Q-VZ-PKY">
+                                <rect key="frame" x="152" y="195" width="110" height="20"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="21" id="bJb-sq-XfD"/>
+                                    <constraint firstAttribute="width" constant="110" id="W7w-Ws-Otc"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="DINAlternate-Bold" family="DIN Alternate" pointSize="17"/>
                                 <color key="textColor" systemColor="systemBlueColor"/>
@@ -38,10 +39,10 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="Q4Q-VZ-PKY" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="EfX-pg-Dpt"/>
-                            <constraint firstItem="Q4Q-VZ-PKY" firstAttribute="top" secondItem="iel-6P-j2c" secondAttribute="bottom" constant="28" id="Mhw-sj-hZ0"/>
-                            <constraint firstItem="iel-6P-j2c" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="88" id="QFA-OY-R27"/>
-                            <constraint firstItem="iel-6P-j2c" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="U75-ku-fJr"/>
+                            <constraint firstItem="Q4Q-VZ-PKY" firstAttribute="top" secondItem="iel-6P-j2c" secondAttribute="bottom" constant="28" id="2nU-17-TK0"/>
+                            <constraint firstItem="iel-6P-j2c" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="88" id="5Tl-Vw-NR6"/>
+                            <constraint firstItem="iel-6P-j2c" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="HhO-LJ-y4W"/>
+                            <constraint firstItem="Q4Q-VZ-PKY" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="scA-kr-nLZ"/>
                         </constraints>
                     </view>
                 </viewController>

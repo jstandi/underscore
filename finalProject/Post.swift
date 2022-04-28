@@ -17,9 +17,11 @@ class Post: NSObject, MKAnnotation {
     var postingUserID: String
     var documentID: String
     var usersWhoLiked: [String]
+    var postedDate: Date!
     
     var dictionary: [String: Any] {
-        return ["text": text, "latitude": latitude, "longitude": longitude, "likes": likes, "postingUsername": postingUsername, "postingUserID": postingUserID, "documentID": documentID, "usersWhoLiked": usersWhoLiked]
+        let timeIntervalDate = postedDate.timeIntervalSince1970
+        return ["text": text, "latitude": latitude, "longitude": longitude, "likes": likes, "postingUsername": postingUsername, "postingUserID": postingUserID, "documentID": documentID, "usersWhoLiked": usersWhoLiked, "postedDate": timeIntervalDate]
     }
     
     var latitude: CLLocationDegrees {
@@ -34,7 +36,7 @@ class Post: NSObject, MKAnnotation {
         return CLLocation(latitude: latitude, longitude: longitude)
     }
     
-    init(text: String, coordinate: CLLocationCoordinate2D, likes: Int, postingUsername: String, postingUserID: String, documentID: String, usersWhoLiked: [String]) {
+    init(text: String, coordinate: CLLocationCoordinate2D, likes: Int, postingUsername: String, postingUserID: String, documentID: String, usersWhoLiked: [String], postedDate: Date) {
         self.text = text
         self.coordinate = coordinate
         self.likes = likes
@@ -42,10 +44,11 @@ class Post: NSObject, MKAnnotation {
         self.postingUserID = postingUserID
         self.documentID = documentID
         self.usersWhoLiked = usersWhoLiked
+        self.postedDate = postedDate
     }
     
     override convenience init() {
-        self.init(text: "", coordinate: CLLocationCoordinate2D(), likes: 0, postingUsername: "", postingUserID: "", documentID: "", usersWhoLiked: [])
+        self.init(text: "", coordinate: CLLocationCoordinate2D(), likes: 0, postingUsername: "", postingUserID: "", documentID: "", usersWhoLiked: [], postedDate: Date())
     }
     
     convenience init(dictionary: [String: Any]) {
@@ -57,7 +60,9 @@ class Post: NSObject, MKAnnotation {
         let postingUsername = dictionary["postingUsername"] as! String? ?? ""
         let postingUserID = dictionary["postingUserID"] as! String? ?? ""
         let usersWhoLiked = dictionary["usersWhoLiked"] as! [String]? ?? []
-        self.init(text: text, coordinate: coordinate, likes: likes, postingUsername: postingUsername, postingUserID: postingUserID, documentID: "", usersWhoLiked: usersWhoLiked)
+        let timeIntervalDate = dictionary["userSince"] as! TimeInterval? ?? TimeInterval()
+        let postedDate = Date(timeIntervalSince1970: timeIntervalDate)
+        self.init(text: text, coordinate: coordinate, likes: likes, postingUsername: postingUsername, postingUserID: postingUserID, documentID: "", usersWhoLiked: usersWhoLiked, postedDate: postedDate)
     }
     
     func saveData(completion: @escaping (Bool) -> ()) {

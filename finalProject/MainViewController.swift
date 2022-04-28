@@ -7,6 +7,7 @@
 
 // TODO: GENERAL:
 // figure out comments
+// figure out tap gesture recognizer from author label
 
 // TODO: FIREBASE:
 // set up following system
@@ -37,9 +38,9 @@ class MainViewController: UIViewController {
         tableView.dataSource = self
         
         posts.loadData {
-            self.tableView.reloadData()
             self.tableView.rowHeight = UITableView.automaticDimension
             self.tableView.estimatedRowHeight = 175
+            self.sortByTime()
         }
     }
     
@@ -65,6 +66,11 @@ class MainViewController: UIViewController {
             destination.user = currentUser
             destination.currentUser = currentUser
         }
+    }
+    
+    func sortByTime() {
+        posts.postArray.sort(by: {$0.postedDate > $1.postedDate})
+        tableView.reloadData()
     }
 }
 

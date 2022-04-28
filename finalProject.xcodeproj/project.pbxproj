@@ -26,6 +26,7 @@
 		DE9C9CC8281882A000533C7E /* ProfilePostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE9C9CC7281882A000533C7E /* ProfilePostTableViewCell.swift */; };
 		DE9C9CCA2819CE7B00533C7E /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE9C9CC92819CE7B00533C7E /* Photo.swift */; };
 		DE9C9CCC2819CFBE00533C7E /* Photos.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE9C9CCB2819CFBE00533C7E /* Photos.swift */; };
+		DE9C9CCE281A0F8900533C7E /* ScoreUsers.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE9C9CCD281A0F8900533C7E /* ScoreUsers.swift */; };
 		DEA57AAE281472C0002E47C0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DEA57AAD281472BF002E47C0 /* GoogleService-Info.plist */; };
 		DEADEEE327FE6E240054D8F8 /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEADEEE227FE6E240054D8F8 /* PostTableViewCell.swift */; };
 		DEEAD9BC2814CBBD002418A8 /* Posts.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEEAD9BB2814CBBD002418A8 /* Posts.swift */; };
@@ -60,6 +61,7 @@
 		DE9C9CC7281882A000533C7E /* ProfilePostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePostTableViewCell.swift; sourceTree = "<group>"; };
 		DE9C9CC92819CE7B00533C7E /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
 		DE9C9CCB2819CFBE00533C7E /* Photos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photos.swift; sourceTree = "<group>"; };
+		DE9C9CCD281A0F8900533C7E /* ScoreUsers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreUsers.swift; sourceTree = "<group>"; };
 		DEA57AAD281472BF002E47C0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		DEADEEE227FE6E240054D8F8 /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
 		DEEAD9BB2814CBBD002418A8 /* Posts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Posts.swift; sourceTree = "<group>"; };
@@ -140,6 +142,7 @@
 				DEED873E2808E9CB004650BB /* Comment.swift */,
 				DEEAD9CB2815E326002418A8 /* Comments.swift */,
 				DE21178C2804B07B00CF10D9 /* ScoreUser.swift */,
+				DE9C9CCD281A0F8900533C7E /* ScoreUsers.swift */,
 				DE9C9CC92819CE7B00533C7E /* Photo.swift */,
 				DE9C9CCB2819CFBE00533C7E /* Photos.swift */,
 				DE62E37F27FE050800CE7B4B /* Main.storyboard */,
@@ -298,6 +301,7 @@
 				DE62E38E27FE0C9E00CE7B4B /* ProfileViewController.swift in Sources */,
 				DEEAD9CA2815D44A002418A8 /* MainLoginViewController.swift in Sources */,
 				DEEAD9CC2815E326002418A8 /* Comments.swift in Sources */,
+				DE9C9CCE281A0F8900533C7E /* ScoreUsers.swift in Sources */,
 				DE21178D2804B07B00CF10D9 /* ScoreUser.swift in Sources */,
 				DE62E37C27FE050800CE7B4B /* SceneDelegate.swift in Sources */,
 				DEED873F2808E9CB004650BB /* Comment.swift in Sources */,

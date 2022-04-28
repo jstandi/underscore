@@ -68,7 +68,6 @@ class MainLoginViewController: UIViewController {
                     print("Tried to save a new user but failed")
                 }
             }
-            performSegue(withIdentifier: "SuccessfulGoogleSignIn", sender: nil)
         }
     }
     
