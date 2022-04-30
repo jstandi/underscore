@@ -175,6 +175,7 @@
                                 <buttonConfiguration key="configuration" style="plain" title="Comment"/>
                                 <connections>
                                     <action selector="commentButtonPressed:" destination="aPD-uQ-0vA" eventType="touchUpInside" id="Gtx-X9-1Ij"/>
+                                    <segue destination="Rx1-SX-QDN" kind="show" identifier="AddComment" id="SjZ-w8-Xqo"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -241,6 +242,65 @@
                 </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="6679.7101449275369" y="89.732142857142847"/>
+        </scene>
+        <!--New Comment View Controller-->
+        <scene sceneID="l2o-u9-wmR">
+            <objects>
+                <viewController modalPresentationStyle="fullScreen" id="maV-BP-Bpv" customClass="NewCommentViewController" customModule="finalProject" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="oMK-c5-WgU">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Replying to: username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hyC-vm-nhI">
+                                <rect key="frame" x="20" y="56" width="374" height="45"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="wCi-MH-ZGX"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="DINAlternate-Bold" family="DIN Alternate" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="T2v-T4-doH">
+                                <rect key="frame" x="20" y="109" width="374" height="699"/>
+                                <color key="backgroundColor" systemColor="systemGray5Color"/>
+                                <color key="textColor" systemColor="labelColor"/>
+                                <fontDescription key="fontDescription" name="DINAlternate-Bold" family="DIN Alternate" pointSize="18"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="oAF-JY-MSg"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="oAF-JY-MSg" firstAttribute="trailing" secondItem="hyC-vm-nhI" secondAttribute="trailing" constant="20" id="6LY-Te-DQc"/>
+                            <constraint firstItem="T2v-T4-doH" firstAttribute="top" secondItem="hyC-vm-nhI" secondAttribute="bottom" constant="8" symbolic="YES" id="WNY-QK-j7Q"/>
+                            <constraint firstItem="hyC-vm-nhI" firstAttribute="top" secondItem="oAF-JY-MSg" secondAttribute="top" id="Z6j-zS-6bP"/>
+                            <constraint firstItem="oAF-JY-MSg" firstAttribute="bottom" secondItem="T2v-T4-doH" secondAttribute="bottom" constant="34" id="bCN-sr-UBR"/>
+                            <constraint firstItem="oAF-JY-MSg" firstAttribute="trailing" secondItem="T2v-T4-doH" secondAttribute="trailing" constant="20" id="bvp-0u-doK"/>
+                            <constraint firstItem="T2v-T4-doH" firstAttribute="leading" secondItem="oAF-JY-MSg" secondAttribute="leading" constant="20" id="ddd-Mu-j1m"/>
+                            <constraint firstItem="hyC-vm-nhI" firstAttribute="leading" secondItem="oAF-JY-MSg" secondAttribute="leading" constant="20" id="y93-lq-hws"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="bSy-UO-lp7">
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="Yu7-zE-BgE">
+                            <connections>
+                                <action selector="cancelButtonPressed:" destination="maV-BP-Bpv" id="gbn-tE-4n8"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Post" id="ZrP-Gw-Dbd">
+                            <connections>
+                                <action selector="postButtonPressed:" destination="maV-BP-Bpv" id="dcz-aK-dRt"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="commentTextView" destination="T2v-T4-doH" id="CRg-qE-ifQ"/>
+                        <outlet property="postBarButton" destination="ZrP-Gw-Dbd" id="hNT-Kv-0Qq"/>
+                        <outlet property="usernameLabel" destination="hyC-vm-nhI" id="fh3-Hl-9aL"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WIF-oP-mLI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="8531.8840579710159" y="89.732142857142847"/>
         </scene>
         <!--New Post-->
         <scene sceneID="GUP-Ls-ppd">
@@ -526,7 +586,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Created by Jack Standefer, 2022. Powered by Firebase.  Version 1.2.0" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ahz-8P-H5i">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Created by Jack Standefer, 2022. Powered by Firebase.  Version 1.3.0" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ahz-8P-H5i">
                                 <rect key="frame" x="20" y="44" width="374" height="258"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
@@ -610,7 +670,7 @@
                                 <color key="textColor" systemColor="systemBlueColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="version 1.2.0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oP2-lZ-qR5">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="version 1.3.0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oP2-lZ-qR5">
                                 <rect key="frame" x="105" y="184" width="204" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="24" id="IXQ-Wh-eSZ"/>
@@ -975,6 +1035,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qPg-Ol-jLw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="6681" y="879"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="CQ1-Vb-PeW">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="fullScreen" id="Rx1-SX-QDN" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="0em-mE-bT6"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="SKI-dq-ZjV">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="maV-BP-Bpv" kind="relationship" relationship="rootViewController" id="tlf-RQ-vwX"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="EZg-0d-jQz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="7622" y="90"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>

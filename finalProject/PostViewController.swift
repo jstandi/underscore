@@ -29,6 +29,11 @@ class PostViewController: UIViewController {
         updateUserInterface()
         
         users = ScoreUsers()
+        comments = Comments()
+        
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.rowHeight = 150
         
         post.loadDataForLikes {
             self.likesLabel.text = "\(self.post.usersWhoLiked.count) likes"
@@ -42,12 +47,22 @@ class PostViewController: UIViewController {
                 }
             }
         }
+        
+        comments.loadData(post: post) {
+            self.tableView.reloadData()
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "ShowProfileFromPost" {
             let destination = segue.destination as! ProfileViewController
             destination.user = postingUser
+        } else if segue.identifier == "AddComment" {
+            let navVC = segue.destination
+            let destination = navVC.children.first! as! NewCommentViewController
+            destination.originalPoster = postingUser
+            destination.currentUser = currentUser
+            destination.originalPost = post
         }
     }
     
@@ -128,6 +143,17 @@ extension PostViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CommentCell", for: indexPath) as! CommentTableViewCell
+        let comment = comments.commentArray[indexPath.row]
+        cell.comment = comment
+        users.loadData {
+            for user in self.users.userArray {
+                if user.userID == comment.posterID {
+                    cell.usernameLabel.text = user.username
+                    cell.commentTextLabel.text = comment.text
+                    cell.likesLabel.text = "\(comment.likes!) likes"
+                }
+            }
+        }
         return cell
     }
 }

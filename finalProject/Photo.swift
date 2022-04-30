@@ -88,7 +88,7 @@ class Photo {
                 self.photoURL = "\(url)"
                 
                 let dataToSave: [String: Any] = self.dictionary
-                let ref = db.collection("spots").document(user.userID).collection("photos").document(self.documentID)
+                let ref = db.collection("users").document(user.userID).collection("photos").document(self.documentID)
                 ref.setData(dataToSave) { (error) in
                     guard error == nil else {
                         print("ERROR in updating document \(error!.localizedDescription)")
@@ -128,7 +128,7 @@ class Photo {
     
     func deleteData(user: ScoreUser, completion: @escaping (Bool) -> ()) {
         let db = Firestore.firestore()
-        db.collection("spots").document(user.userID).collection("photos").document(documentID).delete { error in
+        db.collection("users").document(user.userID).collection("photos").document(documentID).delete { error in
             if let error = error {
                 print("Error: deleting photo documentID \(self.documentID). Error: \(error.localizedDescription)")
                 completion(false)

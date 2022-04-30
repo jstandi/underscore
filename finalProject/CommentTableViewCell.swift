@@ -16,12 +16,6 @@ class CommentTableViewCell: UITableViewCell {
     var hasLiked = false
     
     @IBAction func likeButtonPressed(_ sender: UIButton) {
-        if hasLiked {
-            comment.likes -= 1
-            likesLabel.text = "\(comment.likes!) likes"
-        } else {
-            comment.likes += 1
-            likesLabel.text = "\(comment.likes!) likes"
-        }
+        
     }
 }

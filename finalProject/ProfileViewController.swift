@@ -63,13 +63,13 @@ class ProfileViewController: UIViewController {
         posts.loadData() {
             for post in self.posts.postArray {
                 if post.postingUserID == self.user.userID {
-                    if !self.profilePosts.contains(post) {
-                        self.profilePosts.append(post)
-                        self.totalLikes += post.likes
-                    }
+                    self.profilePosts.append(post)
+                    self.totalLikes += 1
                 }
             }
+            
             self.tableView.reloadData()
+            self.sortByTime()
             self.numPostsLabel.text = "\(self.profilePosts.count) Posts"
             self.likesLabel.text = "\(self.totalLikes) Likes"
         }
@@ -97,6 +97,11 @@ class ProfileViewController: UIViewController {
             destination.currentUser = currentUser
             destination.post = profilePosts[tableView.indexPathForSelectedRow!.row]
         }
+    }
+    
+    func sortByTime() {
+        profilePosts.sort(by: {$0.postedDate > $1.postedDate})
+        tableView.reloadData()
     }
     
     func cameraOrLibraryAlert() {

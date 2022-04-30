@@ -8,6 +8,8 @@
 // TODO: GENERAL:
 // figure out comments
 // figure out tap gesture recognizer from author label
+// annoying bug with repeated posts showing up in profileViewController, also posts not owned by the user showing up in profileViewController - might be worth to push and rewrite
+// - figured out the bug - posts load into profileViewController when a user clicks on a post in MainViewController. I have no idea why this is happening. pls send help
 
 // TODO: FIREBASE:
 // set up following system
@@ -63,6 +65,7 @@ class MainViewController: UIViewController {
         } else if segue.identifier == "ShowProfile" {
             let navVC = segue.destination as! UINavigationController
             let destination = navVC.viewControllers.first as! ProfileViewController
+//            passes the current user to profileViewController as both user and currentUser - could be the source of the bug
             destination.user = currentUser
             destination.currentUser = currentUser
         }
