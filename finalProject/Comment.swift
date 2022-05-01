@@ -14,22 +14,24 @@ class Comment {
     var posterID: String!
     var documentID: String!
     var likes: Int!
+    var usersWhoLiked: [String]
     
     var dictionary: [String: Any] {
-        return ["text": text!, "originalPostID": originalPostID!, "posterID": posterID!, "documentID": documentID!, "likes": likes!]
+        return ["text": text!, "originalPostID": originalPostID!, "posterID": posterID!, "documentID": documentID!, "likes": likes!, "usersWhoLiked": usersWhoLiked]
     }
     
-    init(text: String, originalPostID: String!, posterID: String, documentID: String, likes: Int) {
+    init(text: String, originalPostID: String!, posterID: String, documentID: String, likes: Int, usersWhoLiked: [String]) {
         self.text = text
         self.originalPostID = originalPostID
         self.posterID = posterID
         self.documentID = documentID
         self.likes = likes
+        self.usersWhoLiked = usersWhoLiked
     }
     
     convenience init() {
         let posterID = Auth.auth().currentUser?.uid ?? ""
-        self.init(text: "", originalPostID: "", posterID: posterID, documentID: "", likes: 0)
+        self.init(text: "", originalPostID: "", posterID: posterID, documentID: "", likes: 0, usersWhoLiked: [])
     }
     
     convenience init(dictionary: [String: Any]) {
@@ -38,8 +40,9 @@ class Comment {
         let posterID = dictionary["posterID"] as! String? ?? ""
         let documentID = dictionary["documentID"] as! String? ?? ""
         let likes = dictionary["likes"] as! Int? ?? 0
+        let usersWhoLiked = dictionary["usersWhoLiked"] as! [String]? ?? []
         
-        self.init(text: text, originalPostID: originalPostID, posterID: posterID, documentID: documentID, likes: likes)
+        self.init(text: text, originalPostID: originalPostID, posterID: posterID, documentID: documentID, likes: likes, usersWhoLiked: usersWhoLiked)
     }
     
     func saveData(post: Post, completion: @escaping (Bool) -> ()) {
@@ -65,6 +68,25 @@ class Comment {
                 }
                 print("Updated document \(self.documentID!) in post \(post.documentID)")
             }
+        }
+    }
+    
+    func loadDataForLikes(post: Post, completed: @escaping () -> ()) {
+        let db = Firestore.firestore()
+        db.collection("posts").document(post.documentID).collection("comments").addSnapshotListener { querySnapshot, error in
+            guard error == nil else {
+                print("ERROR: adding snapshot listener")
+                return completed()
+            }
+            for document in querySnapshot!.documents {
+                let comment = Comment(dictionary: document.data())
+                if document.documentID == self.documentID {
+                    self.likes = comment.likes
+                    self.usersWhoLiked = comment.usersWhoLiked
+                    print("loaded data for post with text: \(comment.text) with list: \(comment.usersWhoLiked)")
+                }
+            }
+            completed()
         }
     }
 }

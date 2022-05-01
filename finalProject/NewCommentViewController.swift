@@ -20,7 +20,7 @@ class NewCommentViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        usernameLabel.text = "Replying to: \(currentUser.username)"
+        usernameLabel.text = "Replying to: \(originalPoster.username)"
         
         comment = Comment()
     }

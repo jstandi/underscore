@@ -27,6 +27,7 @@ class PostViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         updateUserInterface()
+        setupLabelTap()
         
         users = ScoreUsers()
         comments = Comments()
@@ -144,13 +145,17 @@ extension PostViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CommentCell", for: indexPath) as! CommentTableViewCell
         let comment = comments.commentArray[indexPath.row]
-        cell.comment = comment
+        comment.loadDataForLikes(post: post) {
+            cell.comment = comment
+            cell.likesLabel.text = "\(comment.likes!) likes"
+        }
+        cell.currentUser = currentUser
+        cell.originalPost = post
         users.loadData {
             for user in self.users.userArray {
                 if user.userID == comment.posterID {
-                    cell.usernameLabel.text = user.username
+                    cell.usernameLabel.text = self.postingUser.username
                     cell.commentTextLabel.text = comment.text
-                    cell.likesLabel.text = "\(comment.likes!) likes"
                 }
             }
         }
