@@ -34,17 +34,24 @@ class MainViewController: UIViewController {
             self.tableView.rowHeight = UITableView.automaticDimension
             self.tableView.estimatedRowHeight = 175
             self.sortByTime()
-            for post in self.posts.postArray {
-                if self.currentLocation == nil {
-                    print("current location is nil, unable to sort by location")
-                } else {
+            if self.currentLocation == nil {
+                while self.currentLocation == nil {
+                    self.getLocation()
+                }
+                print(self.currentLocation.coordinate)
+                for post in self.posts.postArray {
                     if post.location.distance(from: self.currentLocation) < 16093.4 {
                         self.postsInRange.append(post)
                     }
-                    self.tableView.reloadData()
                 }
+                self.tableView.reloadData()
             }
-            print(self.postsInRange)
+            for post in self.posts.postArray {
+                if post.location.distance(from: self.currentLocation) < 16093.4 {
+                    self.postsInRange.append(post)
+                }
+                self.tableView.reloadData()
+            }
         }
     }
     

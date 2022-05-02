@@ -30,6 +30,7 @@
 		DEA57AAE281472C0002E47C0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DEA57AAD281472BF002E47C0 /* GoogleService-Info.plist */; };
 		DEADEEE327FE6E240054D8F8 /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEADEEE227FE6E240054D8F8 /* PostTableViewCell.swift */; };
 		DEAE8A47281DCB5E00970CC9 /* NewCommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEAE8A46281DCB5E00970CC9 /* NewCommentViewController.swift */; };
+		DEDC584B281F715200049ACA /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEDC584A281F715200049ACA /* LoadingViewController.swift */; };
 		DEEAD9BC2814CBBD002418A8 /* Posts.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEEAD9BB2814CBBD002418A8 /* Posts.swift */; };
 		DEEAD9CA2815D44A002418A8 /* MainLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEEAD9C92815D44A002418A8 /* MainLoginViewController.swift */; };
 		DEEAD9CC2815E326002418A8 /* Comments.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEEAD9CB2815E326002418A8 /* Comments.swift */; };
@@ -66,6 +67,7 @@
 		DEA57AAD281472BF002E47C0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		DEADEEE227FE6E240054D8F8 /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
 		DEAE8A46281DCB5E00970CC9 /* NewCommentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCommentViewController.swift; sourceTree = "<group>"; };
+		DEDC584A281F715200049ACA /* LoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
 		DEEAD9BB2814CBBD002418A8 /* Posts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Posts.swift; sourceTree = "<group>"; };
 		DEEAD9C92815D44A002418A8 /* MainLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainLoginViewController.swift; sourceTree = "<group>"; };
 		DEEAD9CB2815E326002418A8 /* Comments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comments.swift; sourceTree = "<group>"; };
@@ -132,6 +134,7 @@
 				DE62E39127FE0CBB00CE7B4B /* PostViewController.swift */,
 				DE377ACE28063FA0005A0B57 /* LoginViewController.swift */,
 				DEEAD9C92815D44A002418A8 /* MainLoginViewController.swift */,
+				DEDC584A281F715200049ACA /* LoadingViewController.swift */,
 				DE377AD02806400A005A0B57 /* NewUserSignUpViewController.swift */,
 				DE332DE22808AAC700E4409D /* UsernameLoginViewController.swift */,
 				DEFF2A072817403600E87787 /* NewGoogleUserViewController.swift */,
@@ -298,6 +301,7 @@
 				DE62E37E27FE050800CE7B4B /* MainViewController.swift in Sources */,
 				DEAE8A47281DCB5E00970CC9 /* NewCommentViewController.swift in Sources */,
 				DE377AD328067619005A0B57 /* UIViewController+alert.swift in Sources */,
+				DEDC584B281F715200049ACA /* LoadingViewController.swift in Sources */,
 				DE62E37A27FE050800CE7B4B /* AppDelegate.swift in Sources */,
 				DEADEEE327FE6E240054D8F8 /* PostTableViewCell.swift in Sources */,
 				DE332DE32808AAC700E4409D /* UsernameLoginViewController.swift in Sources */,

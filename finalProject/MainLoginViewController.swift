@@ -22,7 +22,7 @@ class MainLoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        getLocation()
+//        getLocation()
         
         usernameSignInButton.isHidden = true
         newUserSignInButton.isHidden = true
@@ -35,8 +35,7 @@ class MainLoginViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "SuccessfulGoogleSignIn" {
-            let navVC = segue.destination
-            let destination = navVC.children.first as! MainViewController
+            let destination = segue.destination as! LoadingViewController
             guard let currentUser = authUI.auth?.currentUser else {
                 print("couldn't get current user")
                 return
