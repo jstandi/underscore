@@ -452,33 +452,34 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="bio here" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5VN-y2-AUz">
-                                        <rect key="frame" x="8" y="45" width="398" height="91"/>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="bio here" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="jlr-oU-ENL">
+                                        <rect key="frame" x="8" y="39" width="398" height="97"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="91" id="LgB-oj-BMW"/>
+                                            <constraint firstAttribute="height" constant="97" id="cHT-ZA-Oql"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" name="DINAlternate-Bold" family="DIN Alternate" pointSize="15"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
+                                        <color key="textColor" systemColor="labelColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstItem="R3T-Cn-ZqC" firstAttribute="top" secondItem="4Wf-tv-8lh" secondAttribute="bottom" constant="4" id="0ei-Uh-41P"/>
+                                    <constraint firstItem="4Wf-tv-8lh" firstAttribute="top" secondItem="jlr-oU-ENL" secondAttribute="bottom" constant="8" symbolic="YES" id="3xB-iv-8mM"/>
                                     <constraint firstAttribute="bottom" secondItem="h9J-Dv-ZrH" secondAttribute="bottom" constant="8" id="6J8-Nd-F0E"/>
                                     <constraint firstItem="um2-HB-Mg3" firstAttribute="top" secondItem="Y6n-mb-u3Q" secondAttribute="top" constant="8" id="9I6-i6-RPX"/>
                                     <constraint firstItem="R3T-Cn-ZqC" firstAttribute="leading" secondItem="h9J-Dv-ZrH" secondAttribute="trailing" constant="8" symbolic="YES" id="9PE-WB-w4G"/>
-                                    <constraint firstItem="h9J-Dv-ZrH" firstAttribute="top" secondItem="5VN-y2-AUz" secondAttribute="bottom" constant="8" symbolic="YES" id="ARS-V5-9Qe"/>
                                     <constraint firstItem="um2-HB-Mg3" firstAttribute="leading" secondItem="Y6n-mb-u3Q" secondAttribute="leading" constant="8" id="BSs-BO-7p5"/>
+                                    <constraint firstItem="jlr-oU-ENL" firstAttribute="leading" secondItem="Y6n-mb-u3Q" secondAttribute="leading" constant="8" id="C0n-Ak-Md9"/>
+                                    <constraint firstAttribute="trailing" secondItem="jlr-oU-ENL" secondAttribute="trailing" constant="8" id="Saa-Z2-YSx"/>
                                     <constraint firstAttribute="trailing" secondItem="4Wf-tv-8lh" secondAttribute="trailing" constant="8" id="TCt-oq-FjM"/>
-                                    <constraint firstItem="5VN-y2-AUz" firstAttribute="top" secondItem="um2-HB-Mg3" secondAttribute="bottom" constant="8" symbolic="YES" id="Tbj-pG-55v"/>
-                                    <constraint firstAttribute="trailing" secondItem="5VN-y2-AUz" secondAttribute="trailing" constant="8" id="TtQ-ie-cx1"/>
-                                    <constraint firstItem="4Wf-tv-8lh" firstAttribute="top" secondItem="5VN-y2-AUz" secondAttribute="bottom" constant="8" symbolic="YES" id="ZQU-yQ-8XS"/>
                                     <constraint firstItem="h9J-Dv-ZrH" firstAttribute="leading" secondItem="Y6n-mb-u3Q" secondAttribute="leading" constant="8" id="ZZH-BA-fr4"/>
+                                    <constraint firstItem="jlr-oU-ENL" firstAttribute="top" secondItem="um2-HB-Mg3" secondAttribute="bottom" constant="2" id="d61-lj-WwT"/>
                                     <constraint firstAttribute="trailing" secondItem="R3T-Cn-ZqC" secondAttribute="trailing" constant="8" id="ha6-6S-Cjq"/>
                                     <constraint firstAttribute="bottom" secondItem="R3T-Cn-ZqC" secondAttribute="bottom" constant="8" id="niN-jf-PPH"/>
                                     <constraint firstAttribute="trailing" secondItem="um2-HB-Mg3" secondAttribute="trailing" constant="8" id="u25-bG-ef2"/>
                                     <constraint firstItem="4Wf-tv-8lh" firstAttribute="leading" secondItem="h9J-Dv-ZrH" secondAttribute="trailing" constant="8" symbolic="YES" id="vII-fM-pk0"/>
-                                    <constraint firstItem="5VN-y2-AUz" firstAttribute="leading" secondItem="Y6n-mb-u3Q" secondAttribute="leading" constant="8" id="yPR-GB-q1G"/>
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="VyG-Zs-V1h">
@@ -560,7 +561,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="bioLabel" destination="5VN-y2-AUz" id="42J-xf-XJ6"/>
+                        <outlet property="bioTextView" destination="jlr-oU-ENL" id="Wp4-5o-BiE"/>
                         <outlet property="editProfileButton" destination="R3T-Cn-ZqC" id="6Un-sY-rfw"/>
                         <outlet property="likesLabel" destination="4Wf-tv-8lh" id="rKz-LF-qOt"/>
                         <outlet property="numPostsLabel" destination="xSZ-u1-cKG" id="uud-NL-thG"/>

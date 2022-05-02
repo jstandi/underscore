@@ -31,7 +31,6 @@ class LoadingViewController: UIViewController {
             destination.currentLocation = currentLocation
         }
     }
-
 }
 
 extension LoadingViewController: CLLocationManagerDelegate {

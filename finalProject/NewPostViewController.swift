@@ -41,7 +41,6 @@ class NewPostViewController: UIViewController {
         post.postingUsername = user.username
         post.postingUserID = user.userID
         post.postedDate = Date()
-        print(Date())
         post.text = postTextView.text
     }
     

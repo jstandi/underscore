@@ -13,7 +13,7 @@ class ProfileViewController: UIViewController {
     
     @IBOutlet weak var usernameLabel: UITextField!
     @IBOutlet weak var likesLabel: UILabel!
-    @IBOutlet weak var bioLabel: UITextField!
+    @IBOutlet weak var bioTextView: UITextView!
     @IBOutlet weak var editProfileButton: UIButton!
     @IBOutlet weak var numPostsLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
@@ -44,7 +44,6 @@ class ProfileViewController: UIViewController {
         tableView.dataSource = self
         editProfileButton.isHidden = true
         usernameLabel.isEnabled = false
-        bioLabel.isEnabled = false
         
         posts = Posts()
         users = ScoreUsers()
@@ -54,18 +53,18 @@ class ProfileViewController: UIViewController {
             editable = true
             editProfileButton.isHidden = false
             usernameLabel.isEnabled = true
-            bioLabel.isEnabled = true
         }
         
         posts.loadData() {
             for post in self.posts.postArray {
                 if post.postingUserID == self.user.userID {
-                    self.profilePosts.append(post)
-                    self.totalLikes += post.likes
+                    if !self.profilePosts.contains(post) {
+                        self.profilePosts.append(post)
+                        self.totalLikes += post.likes
+                    }
                 }
             }
             
-            self.tableView.reloadData()
             self.sortByTime()
             self.numPostsLabel.text = "\(self.profilePosts.count) Posts"
             self.likesLabel.text = "\(self.totalLikes) Likes"
@@ -75,7 +74,7 @@ class ProfileViewController: UIViewController {
             for user in self.users.userArray {
                 if user.userID == self.user.userID {
                     self.usernameLabel.text = user.username
-                    self.bioLabel.text = user.bio
+                    self.bioTextView.text = user.bio
                 }
             }
         }
@@ -124,7 +123,7 @@ class ProfileViewController: UIViewController {
         if noSpacesUsername != "" {
             user.username = noSpacesUsername
         }
-        user.bio = bioLabel.text!
+        user.bio = bioTextView.text!
         user.updateUserInfo { success in
             if success {
                 self.presentSaveAlert()

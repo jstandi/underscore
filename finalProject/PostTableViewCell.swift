@@ -8,7 +8,6 @@
 import UIKit
 
 class PostTableViewCell: UITableViewCell {
-    // add profile picture somewhere in here
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var postTextLabel: UILabel!
 }

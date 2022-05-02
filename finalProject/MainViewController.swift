@@ -5,9 +5,6 @@
 //  Created by Jack Standefer on 4/6/22.
 //
 
-// TODO: GENERAL:
-// figure out tap gesture recognizer from author label
-
 import UIKit
 import Firebase
 import CoreLocation
@@ -62,8 +59,7 @@ class MainViewController: UIViewController {
     }
     
     func sortByTime() {
-        posts.postArray.sort(by: {$0.postedDate > $1.postedDate})
-        tableView.reloadData()
+        posts.postArray.sort(by: {$0.postedDate < $1.postedDate})
     }
 }
 

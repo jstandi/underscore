@@ -95,7 +95,6 @@ class PostViewController: UIViewController {
     }
     
     @IBAction func authorLabelTapped(_ sender: UITapGestureRecognizer) {
-        //TODO: work out tap gesture recognizer
         print("working")
     }
     
