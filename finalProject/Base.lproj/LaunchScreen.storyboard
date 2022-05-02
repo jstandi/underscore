@@ -26,7 +26,7 @@
                                 <color key="textColor" systemColor="systemBlueColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="version 1.4.1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q4Q-VZ-PKY">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="version 1.5.2" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q4Q-VZ-PKY">
                                 <rect key="frame" x="152" y="195" width="110" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="110" id="W7w-Ws-Otc"/>

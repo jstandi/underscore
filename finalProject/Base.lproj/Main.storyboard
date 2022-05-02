@@ -614,7 +614,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Created by Jack Standefer, 2022. Powered by Firebase.  Version 1.5.0" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ahz-8P-H5i">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Created by Jack Standefer, 2022. Powered by Firebase.  Version 1.5.2" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ahz-8P-H5i">
                                 <rect key="frame" x="20" y="44" width="374" height="258"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
@@ -698,7 +698,7 @@
                                 <color key="textColor" systemColor="systemBlueColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="version 1.5.0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oP2-lZ-qR5">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="version 1.5.2" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oP2-lZ-qR5">
                                 <rect key="frame" x="105" y="184" width="204" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="24" id="IXQ-Wh-eSZ"/>

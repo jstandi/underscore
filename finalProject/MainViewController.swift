@@ -25,33 +25,22 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         posts = Posts()
+        getLocation()
         tableView.delegate = self
         tableView.dataSource = self
-        getLocation()
-        
         posts.loadData {
             self.getLocation()
             self.tableView.rowHeight = UITableView.automaticDimension
             self.tableView.estimatedRowHeight = 175
             self.sortByTime()
-            if self.currentLocation == nil {
-                while self.currentLocation == nil {
-                    self.getLocation()
-                }
-                print(self.currentLocation.coordinate)
-                for post in self.posts.postArray {
-                    if post.location.distance(from: self.currentLocation) < 16093.4 {
+            for post in self.posts.postArray {
+                if post.location.distance(from: self.currentLocation) < 16093.4 {
+                    if !self.postsInRange.contains(post) {
                         self.postsInRange.append(post)
                     }
                 }
-                self.tableView.reloadData()
             }
-            for post in self.posts.postArray {
-                if post.location.distance(from: self.currentLocation) < 16093.4 {
-                    self.postsInRange.append(post)
-                }
-                self.tableView.reloadData()
-            }
+            self.tableView.reloadData()
         }
     }
     
@@ -76,7 +65,6 @@ class MainViewController: UIViewController {
         posts.postArray.sort(by: {$0.postedDate > $1.postedDate})
         tableView.reloadData()
     }
-
 }
 
 extension MainViewController: UITableViewDelegate, UITableViewDataSource {
