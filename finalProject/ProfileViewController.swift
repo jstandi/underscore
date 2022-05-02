@@ -14,8 +14,6 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var usernameLabel: UITextField!
     @IBOutlet weak var likesLabel: UILabel!
     @IBOutlet weak var bioLabel: UITextField!
-    @IBOutlet weak var profilePictureImageView: UIImageView!
-    @IBOutlet weak var changeProfilePictureButton: UIButton!
     @IBOutlet weak var editProfileButton: UIButton!
     @IBOutlet weak var numPostsLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
@@ -23,6 +21,7 @@ class ProfileViewController: UIViewController {
     var posts: Posts!
     var authUI: FUIAuth!
     var user: ScoreUser!
+    var users: ScoreUsers!
     var currentUser: ScoreUser!
     var editable: Bool!
     var profilePosts: [Post] = []
@@ -43,18 +42,16 @@ class ProfileViewController: UIViewController {
         
         tableView.delegate = self
         tableView.dataSource = self
-        imagePickerController.delegate = self
-        changeProfilePictureButton.isHidden = true
         editProfileButton.isHidden = true
         usernameLabel.isEnabled = false
         bioLabel.isEnabled = false
         
         posts = Posts()
+        users = ScoreUsers()
         photos = Photos()
         
         if currentUser.userID == user.userID {
             editable = true
-            changeProfilePictureButton.isHidden = false
             editProfileButton.isHidden = false
             usernameLabel.isEnabled = true
             bioLabel.isEnabled = true
@@ -64,7 +61,7 @@ class ProfileViewController: UIViewController {
             for post in self.posts.postArray {
                 if post.postingUserID == self.user.userID {
                     self.profilePosts.append(post)
-                    self.totalLikes += 1
+                    self.totalLikes += post.likes
                 }
             }
             
@@ -72,6 +69,15 @@ class ProfileViewController: UIViewController {
             self.sortByTime()
             self.numPostsLabel.text = "\(self.profilePosts.count) Posts"
             self.likesLabel.text = "\(self.totalLikes) Likes"
+        }
+        
+        users.loadData {
+            for user in self.users.userArray {
+                if user.userID == self.user.userID {
+                    self.usernameLabel.text = user.username
+                    self.bioLabel.text = user.bio
+                }
+            }
         }
         
         photos.loadData(user: user) {
@@ -104,28 +110,6 @@ class ProfileViewController: UIViewController {
         tableView.reloadData()
     }
     
-    func cameraOrLibraryAlert() {
-        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        let photoLibraryAction = UIAlertAction(title: "Photo Library", style: .default) { (_) in
-            self.accessPhotoLibrary()
-        }
-        let cameraAction = UIAlertAction(title: "Camera", style: .default) { (_) in
-            self.accessCamera()
-        }
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        
-        alertController.addAction(photoLibraryAction)
-        alertController.addAction(cameraAction)
-        alertController.addAction(cancelAction)
-        
-        present(alertController, animated: true, completion: nil)
-    }
-    
-    @IBAction func profilePhotoButtonPressed(_ sender: UIButton) {
-//        TODO: need to fix data-saving issue
-        cameraOrLibraryAlert()
-    }
-    
     func presentSaveAlert() {
         let alertController = UIAlertController(title: "Info Saved", message: nil, preferredStyle: .alert)
         let confirmAction = UIAlertAction(title: "Continue", style: .default, handler: nil)
@@ -138,7 +122,7 @@ class ProfileViewController: UIViewController {
     @IBAction func editButtonPressed(_ sender: UIButton) {
         let noSpacesUsername = usernameLabel.text!.trimmingCharacters(in: .whitespacesAndNewlines)
         if noSpacesUsername != "" {
-            currentUser.username = noSpacesUsername
+            user.username = noSpacesUsername
         }
         user.bio = bioLabel.text!
         user.updateUserInfo { success in
@@ -164,52 +148,4 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
         
-}
-
-extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        
-        photo = Photo()
-        
-        if let editedImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
-            photo.image = editedImage
-            photo.saveData(user: user) { success in
-                if success {
-                    print("photo saved")
-                } else {
-                    print("photo not saved")
-                }
-            }
-            profilePictureImageView.image = editedImage
-        } else if let originalImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-            photo.image = originalImage
-            photo.saveData(user: user) { success in
-                if success {
-                    print("photo saved")
-                } else {
-                    print("photo not saved")
-                }
-            }
-            profilePictureImageView.image = originalImage
-        }
-        dismiss(animated: true, completion: nil)
-    }
-    
-    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        dismiss(animated: true, completion: nil)
-    }
-    
-    func accessPhotoLibrary() {
-        imagePickerController.sourceType = .photoLibrary
-        present(imagePickerController, animated: true, completion: nil)
-    }
-    
-    func accessCamera() {
-        if UIImagePickerController.isSourceTypeAvailable(.camera) {
-            imagePickerController.sourceType = .camera
-            present(imagePickerController, animated: true, completion: nil)
-        } else {
-            self.oneButtonAlert(title: "Camera Not Available", message: "There is no camera available on this device")
-        }
-    }
 }

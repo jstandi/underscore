@@ -7,12 +7,6 @@
 
 // TODO: GENERAL:
 // figure out tap gesture recognizer from author label
-// annoying bug with repeated posts showing up in profileViewController, also posts not owned by the user showing up in profileViewController - might be worth to push and rewrite
-// - figured out the bug - posts load into profileViewController when a user clicks on a post in MainViewController. I have no idea why this is happening. pls send help
-
-// TODO: LOCATION:
-// set up location use alerts, getting location, etc.
-// only show posts from followed people, users in 10mi? radius
 
 import UIKit
 import Firebase
@@ -28,24 +22,29 @@ class MainViewController: UIViewController {
     var currentLocation: CLLocation!
     var postsInRange: [Post] = []
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         posts = Posts()
         tableView.delegate = self
         tableView.dataSource = self
+        getLocation()
         
         posts.loadData {
+            self.getLocation()
             self.tableView.rowHeight = UITableView.automaticDimension
             self.tableView.estimatedRowHeight = 175
             self.sortByTime()
-        }
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        posts.loadData {
-            self.tableView.reloadData()
+            for post in self.posts.postArray {
+                if self.currentLocation == nil {
+                    print("current location is nil, unable to sort by location")
+                } else {
+                    if post.location.distance(from: self.currentLocation) < 16093.4 {
+                        self.postsInRange.append(post)
+                    }
+                    self.tableView.reloadData()
+                }
+            }
+            print(self.postsInRange)
         }
     }
     
@@ -53,7 +52,7 @@ class MainViewController: UIViewController {
         if segue.identifier == "ShowDetail" {
             let destination = segue.destination as! PostViewController
             let selectedIndexPath = tableView.indexPathForSelectedRow!
-            destination.post = posts.postArray[selectedIndexPath.row]
+            destination.post = postsInRange[selectedIndexPath.row]
             destination.currentUser = currentUser
         } else if segue.identifier == "AddPost" {
             let destination = segue.destination as! NewPostViewController
@@ -61,7 +60,6 @@ class MainViewController: UIViewController {
         } else if segue.identifier == "ShowProfile" {
             let navVC = segue.destination as! UINavigationController
             let destination = navVC.viewControllers.first as! ProfileViewController
-//            passes the current user to profileViewController as both user and currentUser - could be the source of the bug
             destination.user = currentUser
             destination.currentUser = currentUser
         }
@@ -71,27 +69,19 @@ class MainViewController: UIViewController {
         posts.postArray.sort(by: {$0.postedDate > $1.postedDate})
         tableView.reloadData()
     }
+
 }
 
 extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if posts.postArray == nil {
-            return 10
-        } else {
-            return posts.postArray.count
-        }
+        return postsInRange.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if posts.postArray == nil {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "Cell") as! PostTableViewCell
-            return cell
-        } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! PostTableViewCell
-            cell.usernameLabel.text = posts.postArray[indexPath.row].postingUsername
-            cell.postTextLabel.text = posts.postArray[indexPath.row].text
-            return cell
-        }
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! PostTableViewCell
+        cell.usernameLabel.text = postsInRange[indexPath.row].postingUsername
+        cell.postTextLabel.text = postsInRange[indexPath.row].text
+        return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

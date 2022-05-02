@@ -69,19 +69,34 @@ class ScoreUser {
     
     func updateUserInfo(completion: @escaping (Bool) -> ()) {
         let db = Firestore.firestore()
-        let userRef = db.collection("users").document(self.userID)
-        userRef.getDocument { document, error in
-            guard error == nil else {
-                print("could not access document")
-                return completion(false)
-            }
-            let dataToSave: [String: Any] = self.dictionary
-            db.collection("users").document(self.userID).setData(dataToSave) { error in
+        // get user ID
+        guard let userID = Auth.auth().currentUser?.uid else {
+            print("ERROR: could not save data - no valid posting user ID")
+            return completion(false)
+        }
+        self.userID = userID
+        // create dictionary
+        let dataToSave: [String: Any] = self.dictionary
+        if self.userID == "" {
+            var ref: DocumentReference? = nil
+            ref = db.collection("users").addDocument(data: dataToSave) { error in
                 guard error == nil else {
-                    print("error: could not save data")
+                    print("ERROR in adding document \(error!.localizedDescription)")
                     return completion(false)
                 }
-                return completion(true)
+                self.userID = ref!.documentID
+                print("Added document \(self.userID)")
+                completion(true)
+            }
+        } else {
+            let ref = db.collection("users").document(self.userID)
+            ref.setData(dataToSave) { (error) in
+                guard error == nil else {
+                    print("ERROR in updating document \(error!.localizedDescription)")
+                    return completion(false)
+                }
+                print("Updated document \(self.userID)")
+                completion(true)
             }
         }
     }

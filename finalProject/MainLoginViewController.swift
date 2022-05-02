@@ -5,23 +5,24 @@
 //  Created by Jack Standefer on 4/24/22.
 //
 
-// issues - crashes on first login
-// sort posts by time
-// need to add time posted to Post
-// crashed when clicking camera from change profile picture
-
 import UIKit
 import FirebaseAuthUI
 import FirebaseGoogleAuthUI
+import CoreLocation
 
 class MainLoginViewController: UIViewController {
     
     var authUI: FUIAuth!
+    var currentLocation: CLLocation!
+    var locationManager: CLLocationManager!
+    
     @IBOutlet weak var usernameSignInButton: UIButton!
     @IBOutlet weak var newUserSignInButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        getLocation()
         
         usernameSignInButton.isHidden = true
         newUserSignInButton.isHidden = true
@@ -39,6 +40,11 @@ class MainLoginViewController: UIViewController {
             guard let currentUser = authUI.auth?.currentUser else {
                 print("couldn't get current user")
                 return
+            }
+            if currentLocation != nil {
+                destination.currentLocation = currentLocation
+            } else {
+                print("could not pass location to MainViewController")
             }
             let user = ScoreUser(user: currentUser)
             destination.currentUser = user
@@ -130,4 +136,56 @@ extension MainLoginViewController: FUIAuthDelegate {
 //        loginViewController.view.addSubview(logoImageView) // Add ImageView to the login controller's main view
 //        return loginViewController
 //    }
+}
+
+extension MainLoginViewController: CLLocationManagerDelegate {
+    func getLocation() {
+//        creating a CLLocationManager will automatically check authorization
+        locationManager = CLLocationManager()
+        locationManager.delegate = self
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        print("Checking authorization status")
+        handleAuthenticationStatus(status: status)
+    }
+    
+    func handleAuthenticationStatus(status: CLAuthorizationStatus) {
+        switch status {
+        case .notDetermined:
+            locationManager.requestWhenInUseAuthorization()
+        case .restricted:
+            self.oneButtonAlert(title: "Location services denied", message: "Parental controls may be restricting location use in this app. ")
+        case .denied:
+            showAlertToPrivacySettings(title: "User has not authorized location settings", message: "Select settings below to enable location services for this app")
+        case .authorizedAlways, .authorizedWhenInUse:
+            locationManager.requestLocation()
+        @unknown default:
+            print("Unknown case of \(status)")
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        currentLocation = locations.last ?? CLLocation()
+        print("Current location is \(currentLocation.coordinate.latitude), \(currentLocation.coordinate.longitude)")
+        }
+    
+    func showAlertToPrivacySettings(title: String, message: String) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        guard let settingsURL = URL(string: UIApplication.openSettingsURLString) else {
+            print("Something went wrong getting the UIApplication.openSettingsURLString")
+            return
+        }
+        let settingsAction = UIAlertAction(title: "Settings", style: .default) { _ in
+            UIApplication.shared.open(settingsURL, options: [:], completionHandler: nil)
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        alertController.addAction(settingsAction)
+        alertController.addAction(cancelAction)
+        present(alertController, animated: true, completion: nil)
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print("ERROR: \(error.localizedDescription). Failed to get device location")
+    }
 }

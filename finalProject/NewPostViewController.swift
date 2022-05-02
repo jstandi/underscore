@@ -11,9 +11,6 @@ import Contacts
 
 class NewPostViewController: UIViewController {
     
-//    TODO: Figure out editing changed from text view, if not, change to text field
-    // tableView cell with varying row height
-    // swift detect UITextView editing changed
     @IBOutlet weak var postingUserLabel: UILabel!
     @IBOutlet weak var postTextView: UITextView!
     @IBOutlet weak var postBarButton: UIBarButtonItem!
@@ -35,8 +32,16 @@ class NewPostViewController: UIViewController {
         postingUserLabel.text = "From: \(user.username)"
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        getLocation()
+    }
+    
     func getInputData() {
         post.postingUsername = user.username
+        post.postingUserID = user.userID
+        post.postedDate = Date()
+        print(Date())
         post.text = postTextView.text
     }
     
